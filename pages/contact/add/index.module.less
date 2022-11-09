@@ -1,0 +1,36 @@
+.container {
+  padding-top: 100px;
+
+  .content {
+    display: flex;
+    justify-content: center;
+
+    .left {
+      width: 800px;
+      .infoCard {
+        border: 1px solid #eee;
+        margin-bottom: 10px;
+        .title {
+          font-size: 18px;
+          height: 25px;
+          line-height: 25px;
+        }
+      }
+    }
+
+    .right {
+      margin-left: 150px;
+      :global {
+        .ant-anchor-ink::before {
+          background-color: #0c71e5;
+        }
+      }
+    }
+  }
+  .bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+}
