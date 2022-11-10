@@ -2,11 +2,14 @@
 FROM node:14.8.0 AS runner
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 # RUN apk add --no-cache libc6-compat
-RUN sudo apt install curl
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-RUN sudo sh -c 'echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list'
-RUN sudo apt update
-RUN sudo apt install yarn
+# RUN sudo apt install curl
+# RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+# RUN sudo sh -c 'echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list'
+# RUN sudo apt update
+# RUN sudo apt install yarn
+RUN node --version
+RUN npm --version
+RUN npm install yarn -g
 RUN yarn --version
 
 WORKDIR /test-app
