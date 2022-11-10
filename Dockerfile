@@ -6,7 +6,7 @@ WORKDIR /test-app
 RUN npm install yarn -g
 RUN yarn global add pm2
 COPY package.json yarn.lock ./
-COPY public ./public
+# COPY public ./public
 COPY .next ./.next
 # RUN yarn
 
