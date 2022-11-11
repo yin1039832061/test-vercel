@@ -2,9 +2,9 @@ name: Push Tencent Cloud
 
 on:
   push:
-    branches: [ main ]
+    branches: [ dev ]
   pull_request:
-    branches: [ main ]
+    branches: [ dev ]
     
 env:
   test: 1
