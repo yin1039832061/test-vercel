@@ -1,5 +1,5 @@
 # Install dependencies only when needed
-FROM node:lts-alpine
+# FROM node:lts-alpine
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 # WORKDIR /test-app
 
@@ -48,14 +48,20 @@ FROM node:lts-alpine
 # COPY --from=builder /test-app/node_modules ./node_modules
 
 # -------------------------------------------------------------------------------------------------
+FROM node:12-alpine
 RUN mkdir /home/node/app/ && chown -R node:node /home/node/app
 WORKDIR /home/node/app
 COPY package.json package.json
 # COPY yarn.lock yarn.lock
 
 USER node
-
-RUN npm install --production
+RUN apk --no-cache --virtual build-dependencies add \
+        python \
+        make \
+        g++ \
+&& yarn install --production \
+&& apk del build-dependencies
+# RUN npm install --production
 COPY --chown=node:node .next .next
 RUN npm install pm2 -g
 
