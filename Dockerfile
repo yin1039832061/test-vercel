@@ -59,7 +59,7 @@ USER node
 
 RUN npm install
 # RUN npm install --production
-COPY --chown=node:node .next .next
+COPY .next .next
 RUN npm install pm2 -g
 
 EXPOSE 8080
