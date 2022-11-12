@@ -1,8 +1,14 @@
 # Install dependencies only when needed
-FROM node:14.8.0 AS runner
+FROM alpine:3.15 AS base
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
-RUN -s /usr/bin/node /usr/local/sbin/node
+WORKDIR /test-app
+
+# 使用apk命令安装 nodejs 和 yarn
+RUN apk add --no-cache --update nodejs=16.16.0-r0 yarn=1.22.17-r0
+
+# 使用apk命令安装 nodejs 和 yarn
+RUN apk add --no-cache --update nodejs=16.16.0-r0 yarn=1.22.17-r0
+
 # RUN sudo apt install curl
 # RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 # RUN sudo sh -c 'echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list'
@@ -10,16 +16,21 @@ RUN -s /usr/bin/node /usr/local/sbin/node
 # RUN sudo apt install yarn
 RUN node --version
 RUN npm --version
-RUN npm install yarn -g
+# RUN npm install yarn -g
 RUN yarn --version
 
-WORKDIR /test-app
+# WORKDIR /test-app
 RUN yarn global add pm2
 COPY package.json yarn.lock ./
 # COPY public ./public
 COPY .next ./.next
-# RUN yarn
 
+FROM base AS install 
+RUN yarn
+
+COPY --from=install /test/node-modules 
+COPY . .
+RUN yarn build:dev
 # Rebuild the source code only when needed
 # FROM node:alpine AS builder
 # WORKDIR /test-app
