@@ -49,7 +49,8 @@
 
 # -------------------------------------------------------------------------------------------------
 FROM  --platform=linux/amd64 node:14
-RUN chmod +x npm
+
+RUN npm install yarn -g
 # RUN apk add --no-cache python g++ make
 RUN mkdir /home/node/app/ && chown -R node:node /home/node/app
 WORKDIR /home/node/app
@@ -58,7 +59,6 @@ COPY package.json package.json
 
 USER node
 RUN npm --version
-RUN npm install yarn -g
 RUN yarn --version
 RUN yarn install
 # RUN npm install --production
