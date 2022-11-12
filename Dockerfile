@@ -1,33 +1,33 @@
 # Install dependencies only when needed
-FROM alpine:3.15 AS base
+FROM node:lts-alpine
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-WORKDIR /test-app
+# WORKDIR /test-app
 
 
 # 使用apk命令安装 nodejs 和 yarn
-RUN apk add --no-cache --update nodejs=16.16.0-r0 yarn=1.22.17-r0
+# RUN apk add --no-cache --update nodejs=16.16.0-r0 yarn=1.22.17-r0
 
 # RUN sudo apt install curl
 # RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 # RUN sudo sh -c 'echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list'
 # RUN sudo apt update
 # RUN sudo apt install yarn
-RUN node --version
-RUN npm --version
+# RUN node --version
+# RUN npm --version
 # RUN npm install yarn -g
-RUN yarn --version
+# RUN yarn --version
 
 # WORKDIR /test-app
-RUN yarn global add pm2
-COPY package.json yarn.lock ./
+# RUN yarn global add pm2
+# COPY package.json yarn.lock ./
 # COPY public ./public
 # COPY .next ./.next
 
-RUN yarn
+# RUN yarn
 
-COPY /test-app/node-modules ./node_modules
-COPY . .
-RUN yarn build:dev
+# COPY /test-app/node-modules ./node_modules
+# COPY . .
+# RUN yarn build:dev
 # Rebuild the source code only when needed
 # FROM node:alpine AS builder
 # WORKDIR /test-app
@@ -47,7 +47,18 @@ RUN yarn build:dev
 # COPY --from=builder /test-app/.next ./.next
 # COPY --from=builder /test-app/node_modules ./node_modules
 
-# RUN cnpm install pm2 -g
+# -------------------------------------------------------------------------------------------------
+RUN mkdir /home/node/app/ && chown -R node:node /home/node/app
+WORKDIR /home/node/app
+COPY package.json package.json
+# COPY yarn.lock yarn.lock
+
+USER node
+
+RUN npm install --production
+COPY --chown=node:node .next .next
+RUN npm install pm2 -g
+
 EXPOSE 8080
 
 # ENV PORT 8080
