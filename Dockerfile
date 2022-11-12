@@ -49,7 +49,7 @@
 
 # -------------------------------------------------------------------------------------------------
 FROM  --platform=linux/amd64 node:14
-RUN apk add --no-cache --update nodejs=16.16.0-r0 yarn=1.22.17-r0
+RUN sudo apk add --no-cache --update nodejs=16.16.0-r0 yarn=1.22.17-r0
 RUN yarn --version
 
 RUN mkdir /home/node/app/ && chown -R node:node /home/node/app
