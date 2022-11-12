@@ -49,9 +49,6 @@
 
 # -------------------------------------------------------------------------------------------------
 FROM  --platform=linux/amd64 node:14
-RUN apt update
-RUN apt install yarn
-RUN yarn --version
 
 RUN mkdir /home/node/app/ && chown -R node:node /home/node/app
 WORKDIR /home/node/app
@@ -59,15 +56,14 @@ COPY package.json package.json
 # COPY yarn.lock yarn.lock
 
 RUN npm --version
-RUN yarn --version
-RUN yarn install
+RUN npm install
 # RUN npm install --production
 
 COPY .next .next
-RUN yarn global add pm2
+RUN npm install pm2
 
 EXPOSE 8080
 
 # ENV PORT 8080
 
-CMD ["pm2 start yarn --name test-app -- start --no-daemon"]
+CMD ["pm2 start npm --name test-app -- start --no-daemon"]
