@@ -59,6 +59,7 @@ USER node
 
 RUN npm install
 # RUN npm install --production
+RUN npm run build:dev
 COPY .next .next
 RUN npm install pm2 -g
 
