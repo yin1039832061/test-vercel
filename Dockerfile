@@ -21,12 +21,11 @@ RUN yarn --version
 RUN yarn global add pm2
 COPY package.json yarn.lock ./
 # COPY public ./public
-COPY .next ./.next
+# COPY .next ./.next
 
-FROM base AS install 
 RUN yarn
 
-COPY --from=install /test/node-modules ./node_modules
+COPY /test-app/node-modules ./node_modules
 COPY . .
 RUN yarn build:dev
 # Rebuild the source code only when needed
