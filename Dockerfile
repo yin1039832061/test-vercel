@@ -49,6 +49,7 @@
 
 # -------------------------------------------------------------------------------------------------
 FROM node:12-alpine
+RUN apk add --no-cache python g++ make
 RUN mkdir /home/node/app/ && chown -R node:node /home/node/app
 WORKDIR /home/node/app
 COPY package.json package.json
@@ -58,9 +59,8 @@ USER node
 RUN apk --no-cache --virtual build-dependencies add \
         python \
         make \
-        g++ \
-&& yarn install --production \
-&& apk del build-dependencies
+        g++
+RUN npm install
 # RUN npm install --production
 COPY --chown=node:node .next .next
 RUN npm install pm2 -g
