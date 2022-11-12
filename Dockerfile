@@ -3,8 +3,6 @@ FROM alpine:3.15 AS base
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 WORKDIR /test-app
 
-# 使用apk命令安装 nodejs 和 yarn
-RUN apk add --no-cache --update nodejs=16.16.0-r0 yarn=1.22.17-r0
 
 # 使用apk命令安装 nodejs 和 yarn
 RUN apk add --no-cache --update nodejs=16.16.0-r0 yarn=1.22.17-r0
@@ -28,7 +26,7 @@ COPY .next ./.next
 FROM base AS install 
 RUN yarn
 
-COPY --from=install /test/node-modules 
+COPY --from=install /test/node-modules ./node_modules
 COPY . .
 RUN yarn build:dev
 # Rebuild the source code only when needed
