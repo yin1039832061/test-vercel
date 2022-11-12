@@ -61,7 +61,7 @@ RUN npm install
 # RUN npm install --production
 
 COPY .next .next
-RUN npm install pm2 -g
+RUN npm install pm2
 
 EXPOSE 8080
 
