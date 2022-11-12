@@ -42,3 +42,4 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          script: cd ~ && sh deploy.sh ${{ secrets.DOCKERHUB_USERNAME }} ${{ secrets.DOCKERHUB_PASSWORD }} #运行脚本
