@@ -57,13 +57,13 @@ COPY package.json package.json
 
 USER node
 RUN npm --version
-RUN npm install yarn -g
+RUN sudo npm install yarn -g
 RUN yarn --version
 RUN yarn install
 # RUN npm install --production
 
 COPY .next .next
-RUN yarn global add pm2
+RUN sudo yarn global add pm2
 
 EXPOSE 8080
 
