@@ -56,12 +56,14 @@ COPY package.json package.json
 # COPY yarn.lock yarn.lock
 
 USER node
-
-RUN npm install
+RUN npm --version
+RUN npm install yarn -g
+RUN yarn --version
+RUN yarn install
 # RUN npm install --production
 
 COPY .next .next
-RUN npm install pm2
+RUN yarn global add pm2
 
 EXPOSE 8080
 
