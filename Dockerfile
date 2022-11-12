@@ -48,7 +48,7 @@
 # COPY --from=builder /test-app/node_modules ./node_modules
 
 # -------------------------------------------------------------------------------------------------
-FROM node:14 --platform=linux/amd64
+FROM  --platform=linux/amd64 node:14
 # RUN apk add --no-cache python g++ make
 RUN mkdir /home/node/app/ && chown -R node:node /home/node/app
 WORKDIR /home/node/app
