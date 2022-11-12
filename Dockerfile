@@ -49,11 +49,9 @@
 
 # -------------------------------------------------------------------------------------------------
 FROM  --platform=linux/amd64 node:14
-USER root
-RUN chmode -R 777 '/root/
-RUN npm install yarn -g
+RUN apk add --no-cache --update nodejs=16.16.0-r0 yarn=1.22.17-r0
+RUN yarn --version
 
-# RUN apk add --no-cache python g++ make
 RUN mkdir /home/node/app/ && chown -R node:node /home/node/app
 WORKDIR /home/node/app
 COPY package.json package.json
