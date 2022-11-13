@@ -53,7 +53,7 @@ FROM  --platform=linux/amd64 node:14
 RUN mkdir /home/node/app/ && chown -R node:node /home/node/app
 WORKDIR /home/node/app
 COPY package.json package.json
-# COPY . .
+COPY .next ./.next
 # COPY yarn.lock yarn.lock
 
 RUN npm --version
