@@ -66,4 +66,4 @@ EXPOSE 8080
 
 # ENV PORT 8080
 
-CMD ["pm2 start npm --name test-app -- start --no-daemon"]
+CMD ["pm2-runtime start npm --name test-app -- start --no-daemon"]
