@@ -21,6 +21,8 @@ function Home(props) {
   return (
     <div>
       home page
+      <br />
+      测试自动部署
       <div onClick={goToListPage}>list page</div>
       <div onClick={() => Router.push('/list')}>list page2</div>
     </div>
