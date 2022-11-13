@@ -53,17 +53,18 @@ FROM  --platform=linux/amd64 node:14
 RUN mkdir /home/node/app/ && chown -R node:node /home/node/app
 WORKDIR /home/node/app
 COPY package.json package.json
+# COPY . .
 # COPY yarn.lock yarn.lock
 
 RUN npm --version
 RUN npm install
 # RUN npm install --production
 
-COPY .next .next
-RUN npm install pm2
+# RUN npm install pm2
 
 EXPOSE 8080
 
 # ENV PORT 8080
 
-CMD ["pm2 start npm --name test-app -- start --no-daemon"]
+# CMD ["pm2 start npm --name test-app -- start --no-daemon"]
+CMD ["npm","start"]
