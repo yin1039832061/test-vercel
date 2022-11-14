@@ -22,7 +22,7 @@ function Home(props) {
     <div>
       home page
       <br />
-      测试自动部署2
+      测试自动部署3
       <div onClick={goToListPage}>list page</div>
       <div onClick={() => Router.push('/list')}>list page2</div>
     </div>
