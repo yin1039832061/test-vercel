@@ -39,12 +39,7 @@ const BasicLayout = ({ children }) => {
         </motion.section>
       </Content>
       <Footer className={styles.footer}>
-        <div className={styles.copyRight}>嘉联支付有限公司版权所有 ©JLPAY All Right Reserved</div>
-        <div className={styles.address}>深圳市南山区深圳湾生态园10栋B座22楼</div>
-        <div className={styles.beian}>
-          <div className={styles.icon}></div>
-          <div className={styles.beianNo}>粤公网安备 44030502003701号粤ICP备10024901号</div>
-        </div>
+        
       </Footer>
     </Layout>
   );
