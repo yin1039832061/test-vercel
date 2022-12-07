@@ -22,7 +22,7 @@ class MyApp extends App<any, any> {
   // }
   render(): React.ReactElement {
     const { pageProps, Component, reduxStore, isServer } = this.props;
-    console.log(isServer, '===');
+    console.log(config , '===');
     const HOCComponent = HOC(Component);
     return (
       <ConfigProvider locale={zh_CN}>
